@@ -66,7 +66,8 @@
 
 <script>
 	
-	import {db} from './../firebase'
+	import {db} from '../firebase'
+	import {auth} from '../firebase'
 
 	export default {
 		data() {
@@ -84,6 +85,13 @@
 					total += this.basket[a].price * this.basket[a].quantity
 				}
 				return total
+			},
+			currentUserId(){
+				if(auth.currentUser){
+					return auth.currentUser.uid
+				} else {
+					return null
+				}
 			}
 		},
 		firebase:{
@@ -114,7 +122,8 @@
 						name: item.name,
 						price: option.price,
 						size: option.size, 
-						quantity
+						quantity,
+						client: this.currentUserId
 					}
 					this.basket.push(newItem)
 				}

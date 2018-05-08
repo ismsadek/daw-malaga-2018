@@ -53,12 +53,17 @@
 <script>
 	
 	import {db} from '../firebase'
+	import {storage} from '../firebase'
+
+	var storageRef = storage.ref();
+	var pizzaPhotosRef = storage.ref('pizzas/fotos');
 
 	export default {
 		data(){
 			return{
 				sending: false,
 				newPizza: {
+					'photo': null,
 					'name': null,
 				  'description': null,
 				  'options': [{
@@ -77,6 +82,7 @@
 				db.ref("menu").push(this.newPizza).then(()=>{
 					this.sending = false
 					this.newPizza =  {
+						'photo': null,
 						'name': null,
 						'description': null,
 						'options': [{

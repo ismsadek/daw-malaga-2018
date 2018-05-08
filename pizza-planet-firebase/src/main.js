@@ -10,6 +10,16 @@ import ResetPassword from './components/ResetPassword'
 import NewUser from './components/NewUser'
 import {auth} from './firebase'
 
+// auth.onAuthStateChanged((user) => {
+//   if (user) {
+//     currentUserId = user.uid 
+//     console.log(user.uid);
+//   }else{
+//     currentUserId = null;
+//     //desconectar
+//   }
+// });
+
 const routes = [
   { path: '/', name:"principal", component: Home },
   { path: '/login', name:"login", component: Login },
