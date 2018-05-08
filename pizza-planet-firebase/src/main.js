@@ -1,0 +1,42 @@
+import Vue from 'vue'
+import App from './App.vue'
+import VueFire from 'vuefire'
+import VueRouter from 'vue-router'
+import Home from './components/Home'
+import Menu from './components/Menu'
+import Admin from './components/Admin'
+import Login from './components/Login'
+import {auth} from './firebase'
+
+const routes = [
+  { path: '/', name:"principal", component: Home },
+  { path: '/login', name:"login", component: Login },
+  { path: '/carta', name:"menu", component: Menu },
+  { path: '/admin', name:"admin", component: Admin, meta: { requiresAuth: true } }
+]
+
+const router = new VueRouter({
+  routes // short for `routes: routes`
+})
+
+router.beforeEach((to,from,next) => {
+  let currentUser = auth.currentUser
+  let isLogin = to.matched.some( record => record.name=="login")
+  let requiresAuth = to.matched.some( record => record.meta.requiresAuth)
+  if (requiresAuth && !currentUser) {
+    next("login")
+  }else if(currentUser && isLogin){
+    next("admin")
+  }else{
+    next()
+  }
+})
+
+Vue.use(VueFire)
+Vue.use(VueRouter)
+
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+})
