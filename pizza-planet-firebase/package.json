@@ -11,8 +11,8 @@
     "deploy": "yarn run build && firebase deploy --only hosting"
   },
   "dependencies": {
-    "firebase": "^4.8.0",
-    "vue": "^2.4.4",
+    "firebase": "^4.13.1",
+    "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuefire": "^1.4.5"
   },

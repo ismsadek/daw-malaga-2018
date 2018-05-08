@@ -6,12 +6,16 @@ import Home from './components/Home'
 import Menu from './components/Menu'
 import Admin from './components/Admin'
 import Login from './components/Login'
+import ResetPassword from './components/ResetPassword'
+import NewUser from './components/NewUser'
 import {auth} from './firebase'
 
 const routes = [
   { path: '/', name:"principal", component: Home },
   { path: '/login', name:"login", component: Login },
   { path: '/carta', name:"menu", component: Menu },
+  { path: '/reset-password', name:"reset-password", component: ResetPassword },
+  { path: '/new-user', name:"new-user", component: NewUser },
   { path: '/admin', name:"admin", component: Admin, meta: { requiresAuth: true } }
 ]
 
